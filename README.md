@@ -8,4 +8,7 @@ cd 3d-engine-python
 pip install -r requirements.txt
 python main.py
 
-![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
+![alt text](https://github.com/ZackPashkin/3d-engine-python/blob/main/for_readme/Screenshot%202020-11-13%20at%2002.00.17.png?raw=true)
+
+
+![alt text](https://github.com/ZackPashkin/3d-engine-python/blob/main/for_readme/3dengine.gif?raw=true)
