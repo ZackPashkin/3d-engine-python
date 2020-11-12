@@ -1,5 +1,11 @@
+    """
+    3d Engine driver here
+    
+    """
 import pygame as pg
+from object_3d import Object3D
 
+ 
 class Render:
     def __init__(self):
         pg.__init__
@@ -8,6 +14,10 @@ class Render:
         self.fps = 60
         self.screen = pg.display.set_mode(self.resolution)
         self.clock = pg.time.Clock()
+        self.create_object()
+        
+    def create_object(self):
+        self.object = Object3D(self)
         
     def draw(self):
         self.screen.fill(pg.Color('black'))
