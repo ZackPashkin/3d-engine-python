@@ -16,6 +16,7 @@ class Render:
         self.screen = pg.display.set_mode(self.resolution)
         self.clock = pg.time.Clock()
         self.create_object()
+       
         
     def create_object(self):
         self.camera = Camera(self, [0.5,1,-4])

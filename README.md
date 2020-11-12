@@ -6,4 +6,4 @@ simple 3d engine on python
 git clone https://github.com/ZackPashkin/3d-engine-python.git
 cd 3d-engine-python
 pip install -r requirements.txt
-python engine.py
+python main.py
