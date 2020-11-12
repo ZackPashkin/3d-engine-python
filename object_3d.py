@@ -21,7 +21,7 @@ class Object3D:
         vertices = self.vertices @ self.render.camera.camera_matrix()
         vertices = vertices @ self.render.projection.projection_matrix
         vertices /= vertices[:, -1].reshape(-1,1)
-        vertices[(vertices > 1) | (vertices < -1)] = 0
+        vertices[(vertices > 1) | (vertices < -2)] = 0
         vertices = vertices @ self.render.projection.to_screen_matrix
         vertices = vertices[:,:2]
         
