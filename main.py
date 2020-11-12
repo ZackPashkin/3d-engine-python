@@ -1,15 +1,16 @@
-    """
+"""
     3d Engine driver here
     
-    """
+"""
 import pygame as pg
-from object_3d import Object3D
-
+from object_3d import *
+from camera import *
+from projection import *
  
 class Render:
     def __init__(self):
         pg.__init__
-        self.resolution = self.width, self.height = 1280, 720
+        self.resolution = self.width, self.height = 1600, 900
         self.h_width, self.h_height = self.width // 2, self.height // 2
         self.fps = 60
         self.screen = pg.display.set_mode(self.resolution)
@@ -17,10 +18,15 @@ class Render:
         self.create_object()
         
     def create_object(self):
+        self.camera = Camera(self, [0.5,1,-4])
+        self.projection = Projection(self)
         self.object = Object3D(self)
+        self.object.translate([0.2,0.4,0.2])
+        self.object.rotate_y(math.pi / 5)
         
     def draw(self):
         self.screen.fill(pg.Color('black'))
+        self.object.draw()
     
     def run(self):
         while True:

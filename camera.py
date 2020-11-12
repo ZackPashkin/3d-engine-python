@@ -1,9 +1,9 @@
-    """
+"""
     Camera physics here
     
-    """
+"""
     
- from matrix_manipulations import *
+from matrix_manipulations import *
  
  
 class Camera:
@@ -14,12 +14,12 @@ class Camera:
         self.up = np.array([0,1,0,1])
         self.right = np.array([1,0,0,1])
         self.h_fov = math.pi / 3
-        self.h_fov = self.h_fov * (render.height / render.width)
+        self.v_fov = self.h_fov * (render.height / render.width)
         self.near_plane = 0.1
         self.far_plane = 100
 
     def translate_matrix(self):
-        x,y,z = self.position
+        x,y,z,w = self.position
         return np.array([
             [1,0,0,0],
             [0,1,0,0],
