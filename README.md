@@ -12,3 +12,8 @@ pip install -r requirements.txt
 python main.py
 
 ![alt text](https://github.com/ZackPashkin/3d-engine-python/blob/main/for_readme/3dengine.gif?raw=true)
+
+
+
+# Reference
+https://github.com/StanislavPetrovV/Software_3D_engine
