@@ -7,15 +7,31 @@ import pygame as pg
 from matrix_manipulations import *
 
 class Object3D:
-    def __init__(self, render):
-        self.render = render
-        self.vertices = np.array([(0,0,0,1),(0,1,0,1), (1,1,0,1), (1,0,0,1),
-                                  (0,0,1,1), (0,1,1,1), (1,1,1,1),(1,0,1,1)])
+    # def __init__(self, render):
+    #     self.render = render
+    #     self.vertices = np.array([(0,0,0,1),(0,1,0,1), (1,1,0,1), (1,0,0,1),
+    #                               (0,0,1,1), (0,1,1,1), (1,1,1,1),(1,0,1,1)])
         
-        self.faces = np.array([(0,1,2,3),(4,5,6,7),(0,4,5,1),(2,3,7,6),(1,2,6,5),(0,3,7,4)])
+    #     self.faces = np.array([(0,1,2,3),(4,5,6,7),(0,4,5,1),(2,3,7,6),(1,2,6,5),(0,3,7,4)])
     
+    # def draw(self):
+    #     self.screen_projection()
+    #     self.object_self_rotation()
+    
+    # for object from file
+    def __init__(self, render,vertices,faces):
+        self.render = render
+        self.vertices = np.array([np.array(v) for v in vertices])
+        self.faces = np.array([np.array(face) for face in faces])
+  
     def draw(self):
         self.screen_projection()
+        self.object_self_rotation()
+        
+        
+    def object_self_rotation(self):
+        "Fuction that make object spin"
+        self.rotate_y(pg.time.get_ticks() % 0.1)
     
     def screen_projection(self):
         vertices = self.vertices @ self.render.camera.camera_matrix()
@@ -28,11 +44,11 @@ class Object3D:
         for face in self.faces:
             polygon = vertices[face]
             if not np.any((polygon == self.render.h_width) | (polygon == self.render.h_height)):
-                pg.draw.polygon(self.render.screen, pg.Color('orange'), polygon, 3)
+                pg.draw.polygon(self.render.screen, pg.Color('orange'), polygon, 1)
                 
         for vertex in vertices:
             if not np.any((vertex == self.render.h_width) | (vertex == self.render.h_height)):
-                pg.draw.circle(self.render.screen, pg.Color('white'), vertex, 6)
+                pg.draw.circle(self.render.screen, pg.Color('white'), vertex, 1)
                     
             
         

@@ -10,7 +10,7 @@ from projection import *
 class Render:
     def __init__(self):
         pg.__init__
-        self.resolution = self.width, self.height = 1280, 720
+        self.resolution = self.width, self.height = 1600, 900
         self.h_width, self.h_height = self.width // 2, self.height // 2
         self.fps = 60
         self.screen = pg.display.set_mode(self.resolution)
@@ -19,11 +19,30 @@ class Render:
        
         
     def create_object(self):
-        self.camera = Camera(self, [0.5,1.0,-3])
+        self.camera = Camera(self, [-1,2,-20])
         self.projection = Projection(self)
-        self.object = Object3D(self)
+        # default object cube
+        # self.object = Object3D(self)
+        # self.object = self.load_object_from_file('assets/eyeball.obj')
+        self.object = self.load_object_from_file('assets/12953_ChocolateRabbit_v1.obj')
+        # self.object = self.load_object_from_file('assets/girl_s.obj')
         self.object.translate([0.2,0.4,0.2])
         self.object.rotate_y(math.pi / 5)
+    
+    
+    def load_object_from_file(self, filename):
+        vertex, faces = [], []
+        with open(filename) as f:
+            for line in f:
+                if line.startswith('v '):
+                    vertex.append([float(i) for i in line.split()[1:]] + [1])
+                elif line.startswith('f'):
+                    faces_ = line.split()[1:]
+                    faces.append([int(face_.split('/')[0])-1 for face_ in faces_])
+        return Object3D(self, vertex, faces)
+    
+        
+    
         
     def draw(self):
         self.screen.fill(pg.Color('black'))

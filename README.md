@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 python main.py
 
-![alt text](https://github.com/ZackPashkin/3d-engine-python/blob/main/for_readme/3dengine.gif?raw=true)
+![alt text](https://github.com/ZackPashkin/3d-engine-python/blob/main/for_readme/rabbit.gif?raw=true)
 
 
 
