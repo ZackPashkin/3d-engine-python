@@ -6,13 +6,14 @@ import pygame as pg
 from object_3d import *
 from camera import *
 from projection import *
+from settings import *
  
 class Render:
     def __init__(self):
         pg.__init__
-        self.resolution = self.width, self.height = 1600, 900
+        self.resolution = self.width, self.height = WINDOW_WIDTH, WINDOW_HEIGHT
         self.h_width, self.h_height = self.width // 2, self.height // 2
-        self.fps = 60
+        self.fps = FPS
         self.screen = pg.display.set_mode(self.resolution)
         self.clock = pg.time.Clock()
         self.create_object()
