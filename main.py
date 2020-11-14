@@ -22,7 +22,7 @@ class Render:
     def create_object(self):
         self.camera = Camera(self, [-1,2,-20])
         self.projection = Projection(self)
-        # default object cube
+        # default object is cube. uncomment also in Object3D to see it
         # self.object = Object3D(self)
         # self.object = self.load_object_from_file('assets/eyeball.obj')
         self.object = self.load_object_from_file('assets/12953_ChocolateRabbit_v1.obj')
