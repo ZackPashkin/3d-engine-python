@@ -5,6 +5,15 @@
     
 import pygame as pg
 from matrix_manipulations import *
+from settings import POLYGON_WIDTH, CIRCLE_WIDTH, DRAW_VERTICES, OBJECT_SPIN
+from numba import njit
+
+
+@njit(fastmath=True)
+def speed_up_numpy_any(arr, width_, height_):
+    # assert width_ == int, "Incorrect input for width. Width should be int"
+    # assert height_ == int, "Incorrect input for height. Height should be int"
+    return np.any((arr == width_) | (arr == height_))
 
 class Object3D:
     # def __init__(self, render):
@@ -23,6 +32,9 @@ class Object3D:
         self.render = render
         self.vertices = np.array([np.array(v) for v in vertices])
         self.faces = np.array([np.array(face) for face in faces])
+        self.movement_flag = DRAW_VERTICES
+        self.draw_vertices = OBJECT_SPIN
+        
   
     def draw(self):
         self.screen_projection()
@@ -43,13 +55,15 @@ class Object3D:
         
         for face in self.faces:
             polygon = vertices[face]
-            if not np.any((polygon == self.render.h_width) | (polygon == self.render.h_height)):
-                pg.draw.polygon(self.render.screen, pg.Color('orange'), polygon, 1)
+            #put numba here
+            if not speed_up_numpy_any(polygon, self.render.h_width, self.render.h_height):
+                pg.draw.polygon(self.render.screen, pg.Color('orange'), polygon, POLYGON_WIDTH)
                 
-        for vertex in vertices:
-            if not np.any((vertex == self.render.h_width) | (vertex == self.render.h_height)):
-                pg.draw.circle(self.render.screen, pg.Color('white'), vertex, 1)
-                    
+        if self.draw_vertices:     
+            for vertex in vertices:
+                if not speed_up_numpy_any(polygon, self.render.h_width, self.render.h_height):
+                    pg.draw.circle(self.render.screen, pg.Color('white'), vertex, CIRCLE_WIDTH)
+                        
             
         
     def translate(self, pos):

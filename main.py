@@ -3,10 +3,10 @@
     
 """
 import pygame as pg
-from object_3d import *
+from my_3d_object import *
 from camera import *
 from projection import *
-from settings import *
+from settings import WINDOW_WIDTH, WINDOW_HEIGHT, FPS
  
 class Render:
     def __init__(self):
